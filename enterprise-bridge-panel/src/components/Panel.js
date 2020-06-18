@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Panel.css';
 
+import { EnterpriseContext } from './EnterpriseContext';
 import WarpDrive from './WarpDrive';
 import WeaponsBay from './WeaponsBay';
 import ShieldGenerator from './ShieldGenerator';
 
 function Panel() {
+  const { energyGauge } = useContext(EnterpriseContext);
+
   return (
     <div className="complete-panel">
-      <span className="energy-gauge">Energia em utilização: PLACEHOLDER</span>
+      <span className="energy-gauge">{`Energia em utilização: ${energyGauge}`}</span>
       <div className="interactions-panel">
         <WarpDrive />
         <WeaponsBay />
