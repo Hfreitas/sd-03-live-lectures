@@ -1,20 +1,13 @@
-const mysqlx = require('@mysql/xdevapi');
+const mongodb = require('mongodb').MongoClient;
 
-let schema;
+const MONGODB_URL = 'mongodb://localhost:27017';
 
-module.exports = () => schema
-  ? Promise.resolve(schema)
-  : mysqlx
-    .getSession({
-      host: 'localhost',
-      user: 'root',
-      password: '',
-      port: 33060
-    })
-    .then(async (session) => {
-      schema = await session.getSchema('live_lecture_31_1');
-      return schema;
-    })
+module.exports = () =>
+  mongodb.connect(MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+    .then(connection => connection.db('animaldb'))
     .catch(err => {
       console.error(err);
       process.exit(1);

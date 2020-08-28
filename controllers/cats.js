@@ -1,31 +1,30 @@
-const CatModel = require('../models/cats');
+const catService = require('../services/catService');
+const rescue = require('express-rescue');
 
 const listCats = async (_req, res) => {
-  const cats = await CatModel.getAll();
+  const cats = await catService.getAll();
 
-  res.render('listCats', { cats, message: null });
+  res.status(200).json(cats);
 };
 
-const newCat = async (req, res) => {
-  const { name, age } = req.body;
+const newCat = rescue(async (req, res) => {
+  const { cat, owner } = req.body;
 
-  if (!CatModel.isValid(name, age)) {
-    res.status(402).render('listCats', { cats: null, message: 'Nome ou idade inválidos' });
-  }
+  const result = await catService.add({ cat, owner });
 
-  await CatModel.add(name, parseInt(age, 10));
+  if (result.error) return res.status(422).json({ message: result.error.message });
 
-  res.status(201).render('success');
-};
+  res.status(201).end();
+});
 
 const catDetails = async (req, res) => {
   const { id } = req.params;
 
-  const cat = await CatModel.getCatById(id);
+  const cat = await catService.getById(id);
 
-  if (!cat) return res.status(404).render('notFound');
+  if (!cat) return res.status(404).json({ message: 'Cat not found' });
 
-  res.status(200).render('catDetails', { cat });
+  res.status(200).json(cat);
 };
 
 module.exports = {
