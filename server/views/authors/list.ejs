@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <% if (authors.length) { %>
+    <ul>
+      <% authors.forEach((author) => { %>
+      <a href="/authors/<%= author.id %>">
+        <li>Nome: <%= author.name %>. Email: <%= author.email %></li>
+      </a>
+      <% }) %>
+    </ul>
+    <% } %> <% if (!authors.length) { %>
+    <h2>Nenhum author cadastrado!</h2>
+    <% } %>
+  </body>
+</html>
