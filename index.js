@@ -2,10 +2,13 @@ const express = require('express');
 
 const app = express();
 
+// 39502
+const PORT = process.env.PORT || 3000;
+const SERVER_ENV = process.env.SERVER_ENV || 'deu ruim :/';
+
 app.get('/', (_, res) => {
-  res.send('Hello, world!');
+  res.send(`Você está no ambiente de ${SERVER_ENV}`);
 });
 
-const port = process.env.PORT || 3000;
 
-app.listen(port, () => { console.log(`Escutando na porta ${port}`); });
+app.listen(PORT, () => { console.log(`Escutando na porta ${PORT}`); });
