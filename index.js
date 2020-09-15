@@ -10,5 +10,4 @@ app.get('/', (_, res) => {
   res.send(`Você está navegando no ambiente de ${SERVER_ENV}`);
 });
 
-
 app.listen(PORT, () => { console.log(`Escutando na porta ${PORT}`); });
