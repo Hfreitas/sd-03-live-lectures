@@ -1,0 +1,26 @@
+{
+  "name": "colorful-process",
+  "version": "1.0.0",
+  "description": "Este repositório armazena os códigos e scripts fornecidos durante as palestras ao vivo pelos especialistas da Trybe.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pm2": "^4.4.1",
+    "random-hex-color": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tryber/sd-03-live-lectures.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tryber/sd-03-live-lectures/issues"
+  },
+  "homepage": "https://github.com/tryber/sd-03-live-lectures#readme"
+}
