@@ -1,3 +1,5 @@
 apps:
   - name: colorful-process
     script: ./index.js
+    exec_mode: cluster
+    instances: max
