@@ -1,4 +1,3 @@
 apps:
   - name: colorful-process
     script: ./index.js
-    watch: true
