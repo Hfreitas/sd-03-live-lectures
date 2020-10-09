@@ -1,14 +1,14 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
 
-const { Product } = require('../models');
+const { Product, User } = require('../models');
 
 const products = Router();
 
 products.post('/', rescue((req, res) => {
-  const { name, description, price } = req.body;
+  const { name, description, price, userId } = req.body;
 
-  Product.create({ name, description, price })
+  Product.create({ name, description, price, userId })
     .then(newProduct => res.status(201).json(newProduct));
 }));
 
@@ -17,7 +17,13 @@ products.get('/', rescue((req, res) => {
 }));
 
 products.get('/:id', rescue((req, res) => {
-  Product.findByPk(req.params.id)
+  Product.findByPk(req.params.id, {
+    attributes: { exclude: ['userId'] },
+    include: {
+      model: User, as: 'user',
+      attributes: { exclude: ['password'] }
+    }
+  })
     .then(product => {
       if (!product) return res.status(404).json({ ok: false, message: 'Product not found' });
 
@@ -31,9 +37,9 @@ products.delete('/:id', rescue((req, res) => {
 }));
 
 products.put('/:id', rescue((req, res) => {
-  const { name, description, price } = req.body;
+  const { name, description, price, userId } = req.body;
 
-  Product.update({ name, description, price }, { where: { id: req.params.id } })
+  Product.update({ name, description, price, userId }, { where: { id: req.params.id } })
     .then(() => Product.findByPk(req.params.id))
     .then(product => res.status(200).json(product));
 }));
