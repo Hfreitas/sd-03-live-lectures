@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "root",
+    "password": null,
+    "database": "cookmaster_3",
+    "host": "localhost",
+    "port": 3306,
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "cookmaster_3",
+    "host": "localhost",
+    "port": 33060,
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "cookmaster_3",
+    "host": "localhost",
+    "port": 33060,
+    "dialect": "mysql"
+  }
+}
