@@ -1,0 +1,23 @@
+{
+  "name": "sd-03-live-lectures",
+  "version": "1.0.0",
+  "description": "Este repositório armazena os códigos e scripts fornecidos durante as palestras ao vivo pelos especialistas da Trybe.",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tryber/sd-03-live-lectures.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tryber/sd-03-live-lectures/issues"
+  },
+  "homepage": "https://github.com/tryber/sd-03-live-lectures#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
