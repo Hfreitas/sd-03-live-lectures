@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notification Admin Pannel</title>
+    <!-- Carrega o socket.io -->
+    <script src="http://localhost:4555/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <input type="text" id="input" disabled />
+    <button type="submit" id="submit" disabled>Enviar Notificação</button>
+
+    <!-- Configura interação com o servidor -->
+    <script>
+      const input = document.getElementById("input");
+      const submit = document.getElementById("submit");
+
+      const socket = io("http://localhost:4555");
+
+      const username = prompt("Nome de usuário");
+      const password = prompt("Password");
+
+      socket.emit("login", { username, password });
+
+      socket.on("loginFailed", ({ message }) => {
+        alert(message);
+      });
+
+      socket.on("token", ({ token }) => {
+        localStorage.setItem("token", token);
+
+        input.disabled = false;
+        submit.disabled = false;
+      });
+
+      submit.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        socket.emit("notification", input.value);
+      });
+    </script>
+  </body>
+</html>

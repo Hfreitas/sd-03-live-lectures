@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.io - Client Demo</title>
+
+  <!-- Carrega o socket.io -->
+  <script src="http://localhost:4555/socket.io/socket.io.js"></script>
+
+  <!-- Configura interação com o servidor -->
+  <script>
+    const socket = io('http://localhost:4555')
+
+    socket.on('notification', (data) => {
+      const li = document.createElement('li')
+      li.textContent = data
+      document.getElementById('mensagem').appendChild(li)
+    })
+
+    socket.on('history', notifications => {
+      notifications.forEach(data => {
+        const li = document.createElement('li')
+        li.textContent = data
+        document.getElementById('mensagem').appendChild(li)
+      })
+    })
+  </script>
+</head>
+<body>
+  <div>
+    <ul id="mensagem"></ul>
+  </div>
+</body>
+</html>
