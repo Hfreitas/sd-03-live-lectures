@@ -1,7 +1,7 @@
 const express = require('express');
 const mysql = require('@mysql/xdevapi');
 
-const { DB_URI, DB_NAME } = process.env;
+const { DB_URI, DB_NAME, PORT = 3000 } = process.env;
 
 async function start() {
   const schema = await mysql.getSession(DB_URI).getSchema(DB_NAME);
@@ -30,6 +30,10 @@ async function start() {
       .then((results) => results.map(([id, name]) => ({ id, name })));
 
     res.status(200).json(rows);
+  });
+
+  app.listen(PORT, () => {
+    console.log(`Listening on ${PORT}`);
   });
 }
 
