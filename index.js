@@ -1,12 +1,17 @@
 const express = require('express');
 const mysql = require('@mysql/xdevapi');
+const bodyParser = require('body-parser');
 
 const { DB_URI, DB_NAME, PORT = 3000 } = process.env;
 
 async function start() {
-  const schema = await mysql.getSession(DB_URI).getSchema(DB_NAME);
+  const schema = await mysql
+    .getSession(DB_URI)
+    .then((session) => session.getSchema(DB_NAME));
 
   const app = express();
+
+  app.use(bodyParser.json());
 
   app.post('/', async (req, res) => {
     const { name } = req.body;
